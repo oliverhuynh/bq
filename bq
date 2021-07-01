@@ -27,6 +27,12 @@ ignoreEX=""
   shift
 }
 
+exitRA=""
+[ "$1" = "-e" ] && {
+  exitRA=" -e"
+  shift
+}
+
 [ "$1" = "-h" ] && {
   cat <<-EOF
 	Example usage:
@@ -112,11 +118,6 @@ _work_1() {
 
 # '-w' starts a worker; each worker runs one job at a time, so if you want
 # more jobs to run simultaneously, run this multiple times!
-exitRA=""
-[ "$1" = "-e" ] && [ "$2" = "-w" ] && {
-  exitRA=" -e"
-  shift
-}
 
 [ "$1" = "-w" ] && [ -z "$2" ] && {
   running=$(
