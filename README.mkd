@@ -33,6 +33,8 @@ something that just uses bash is very useful.
     # you can only run one simple command; if you have a command with shell
     # meta characters (;, &, &&, ||, >, <, etc), do this:
     bq bash -c 'echo hello; echo there >junk.$RANDOM'
+## installation
+`wget https://raw.githubusercontent.com/oliverhuynh/bq/master/bq -O /usr/local/bin/bq && chmod +x /usr/local/bin/bq`
 
 ## workers
 
