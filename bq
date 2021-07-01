@@ -178,3 +178,7 @@ _work_1() {
 ID=`date +%s`.$$.${1//[^a-z0-9_.-]/}
 pwd                 > $QDIR/q/$ID
 printf "%s\n" "$@" >> $QDIR/q/$ID
+
+# Print the ID for tracking
+echo "Queued job with id:" >&2
+echo "$ID"
