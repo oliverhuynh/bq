@@ -22,7 +22,11 @@ something that just uses bash is very useful.
 ## quick overview
 
     # start a worker
-    bq -w
+    bq -w 
+    # exit if worker could not find any command to run after 60 seconds
+    bq -e -w 
+    # start only 1 worker, ignore if there is already running, and exit if no new command
+    bq -i -e -w 
     # start a couple of jobs
     bq some long running command
     bq another command  # will run after the previous one completes
@@ -34,6 +38,10 @@ something that just uses bash is very useful.
     # meta characters (;, &, &&, ||, >, <, etc), do this:
     bq bash -c 'echo hello; echo there >junk.$RANDOM'
 ## installation
+`sudo apt install inotify-tools`
+### quicker
+`yarn global add ssh://git@github.com/oliverhuynh/bq.git --prefix /usr/local/bin --force`
+### custom
 `wget https://raw.githubusercontent.com/oliverhuynh/bq/master/bq -O /usr/local/bin/bq && chmod +x /usr/local/bin/bq`
 
 ## workers
