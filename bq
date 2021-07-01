@@ -143,9 +143,12 @@ exitRA=""
 
 # ----------------------------------------------------------------------
 # STOP A WORKER
-
 [ "$1" = "-k" ] && [ -z "$2" ] && {
-  touch $QDIR/q/0.$$.-k
+  exitting=$(
+    cd $QDIR/q
+    ls | grep -F ".-k" | wc -l
+  )
+  [ "$exitting" -gt "0" ] || touch $QDIR/q/0.$$.-k
   # starting with a "0" assures that in an "ls" this file will come before
   # any normal task files (which all start with `date +%s`).  The contents
   # don't matter, since it won't be "executed" in the normal manner.
@@ -172,9 +175,7 @@ exitRA=""
       inotifywait -q -t 60 -e create q >/dev/null
       # Exit if waited for 60 seconds
       [ "${exitRA}" != "" ] && {
-        pwd >&2
-        "$0" -k
-        exit 0
+        "$0" -k &
       }
       continue
       # whether we got an event or just timed out, we just go back round
