@@ -1,0 +1,28 @@
+{
+  "name": "bq",
+  "version": "1.0.3",
+  "description": "",
+  "main": "main.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier-format && git add . --dry-run"
+    }
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "prettier": "^2.3.1",
+    "prettier-plugin-sh": "^0.6.1",
+    "run-script-os": "^1.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier-format": "prettier --write --config .prettierrc 'bq'"
+  },
+  "bin": {
+    "bq": "./bq"
+  },
+  "author": "",
+  "license": "ISC"
+}
