@@ -120,12 +120,15 @@ _work_1() {
 # more jobs to run simultaneously, run this multiple times!
 
 [ "$1" = "-w" ] && [ -z "$2" ] && {
+  realrun=$(
+    ps aux | grep $0 | grep -v "grep" | awk '{print $5}' | uniq | wc -l
+  )
   running=$(
     cd $QDIR/w
     ls | grep -v exited | wc -l
   )
 
-  [ "$ignoreEX" != "" ] && [ "$running" -gt "0" ] && echo "ignoring since existed" && exit 1
+  [ "$ignoreEX" != "" ] && [ "$running" -gt "0" ] && [ "$realrun" -gt "1" ] && echo "ignoring since existed" && exit 1
 
   # if the user is starting a worker, any existing kill commands don't apply
   rm -f $QDIR/q/0.*.-k
