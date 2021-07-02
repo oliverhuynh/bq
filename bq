@@ -121,7 +121,8 @@ _work_1() {
 
 [ "$1" = "-w" ] && [ -z "$2" ] && {
   realrun=$(
-    ps aux | grep $0 | grep -v "grep" | awk '{print $5}' | uniq | wc -l
+    # ps aux | grep $0 | grep -v "grep" | awk '{print $5}' | uniq | wc -l
+    ps aux | grep $0 | grep -v "grep" | grep -v "$$" | wc -l
   )
   running=$(
     cd $QDIR/w
